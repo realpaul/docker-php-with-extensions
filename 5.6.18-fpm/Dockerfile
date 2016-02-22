@@ -6,6 +6,7 @@ RUN set -ex \
 	&& apt-get install -y libapache2-mod-php5 \
 	&& docker-php-ext-install mysql \
 	&& docker-php-ext-install mysqli \
+	&& docker-php-ext-install pdo pdo_mysql \
 	&& docker-php-ext-install mbstring json session fileinfo exif gettext sockets
 
 EXPOSE 9000
