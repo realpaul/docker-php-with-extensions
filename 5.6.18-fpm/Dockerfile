@@ -2,6 +2,14 @@ FROM php:5.6.18-fpm
 
 RUN set -ex \
 	&& apt-get update \
+	&& apt-get install -y wget \
+	&& wget -O /tmp/temp.gpg https://download.newrelic.com/548C16BF.gpg \
+	&& apt-key add /tmp/temp.gpg \
+	&& rm -rf /tmp/temp.gpg \
+	&& echo "deb http://apt.newrelic.com/debian/ newrelic non-free" > /etc/apt/sources.list.d/newrelic.list \
+	&& apt-get update \
+	&& apt-get install -y newrelic-php5 \
+	&& echo newrelic-install install \
 	&& apt-get install -y php5-mysql \
 	&& apt-get install -y php5-gd libfreetype6-dev libjpeg62-turbo-dev libpng12-dev \
 	&& apt-get install -y libapache2-mod-php5 \
