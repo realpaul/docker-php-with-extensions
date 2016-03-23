@@ -16,6 +16,7 @@ RUN set -ex \
 	&& apt-get install -y php5-gd libfreetype6-dev libjpeg62-turbo-dev libpng12-dev \
 	&& apt-get install -y libapache2-mod-php5 \
 	&& docker-php-ext-install mcrypt \
+	&& cp /usr/src/php/ext/openssl/config0.m4 /usr/src/php/ext/openssl/config.m4 \
 	&& docker-php-ext-install openssl \
 	&& docker-php-ext-install mysql \
 	&& docker-php-ext-install mysqli \
