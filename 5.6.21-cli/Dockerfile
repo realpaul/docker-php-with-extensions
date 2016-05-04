@@ -1,4 +1,4 @@
-FROM php:5.6.18-cli
+FROM php:5.6.21-cli
 
 RUN set -ex \
 	&& apt-get update \

@@ -1,4 +1,4 @@
-FROM php:5.6.18-fpm
+FROM php:5.6.21-fpm
 
 RUN set -ex \
 	&& apt-get update \
