@@ -1,4 +1,4 @@
-FROM php:7.0.7-fpm-alpine
+FROM php:7.0.8-fpm-alpine
 
 RUN set -ex \
   && apk add --update bash build-base wget curl m4 autoconf libtool imagemagick imagemagick-dev zlib zlib-dev libcurl curl-dev libevent libevent-dev libidn libidn-dev \
@@ -16,7 +16,12 @@ RUN set -ex \
   && mkdir /opt \
   && tar xfz /tmp/newrelic.tar.gz -C /opt \
   && mv /opt/newrelic-php5-6.4.0.163-linux /opt/newrelic-install \
-  && rm -rf /tmp/newrelic*
+  && cd /tmp \
+  && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+  && php -r "if (hash_file('SHA384', 'composer-setup.php') === 'e115a8dc7871f15d853148a7fbac7da27d6c0030b848d9b3dc09e2a0388afed865e6a3d6b3c0fad45c48e2b5fc1196ae') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); exit(1); } echo PHP_EOL;" \
+  && php composer-setup.php --install-dir=/usr/local/bin --filename=composer \
+  && php -r "unlink('composer-setup.php');" \
+  && rm -rf /tmp/*
 
 EXPOSE 9000
 CMD ["php-fpm"]
