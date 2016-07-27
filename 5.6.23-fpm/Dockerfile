@@ -1,7 +1,7 @@
 FROM php:5.6.23-fpm-alpine
 
 RUN set -ex \
-  && apk add --no-cache --virtual bash build-base wget curl m4 autoconf libtool imagemagick imagemagick-dev zlib zlib-dev libcurl curl-dev libevent libevent-dev libidn libidn-dev \
+  && apk add --update bash build-base wget curl m4 autoconf libtool imagemagick imagemagick-dev zlib zlib-dev libcurl curl-dev libevent libevent-dev libidn libidn-dev \
   && printf "\n" | pecl install raphf-1.1.2 propro-1.0.2 \
   && docker-php-ext-enable raphf propro \
   && printf "\n" | pecl install pecl_http-2.5.6 \
